@@ -28,6 +28,9 @@ Puppet 8 no longer provides legacy (Facter 2 style) facts by default. The plugin
 Parses all 234 manifests of puppetlabs-apache, -stdlib, -mysql, -postgresql, -concat, -firewall, -ntp and
 voxpupuli/puppet-nginx without errors.
 
+## Source code
+The plugin is closed source (free to use under the EULA); this repository hosts its documentation, license and issue tracker. The source code is not public.
+
 ## Support
 Please open an [issue](../../issues) with your IDE version and a minimal manifest snippet (remove secrets first).
 
