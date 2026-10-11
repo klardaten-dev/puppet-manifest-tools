@@ -28,6 +28,13 @@ Puppet 8 no longer provides legacy (Facter 2 style) facts by default. The plugin
 Parses all 234 manifests of puppetlabs-apache, -stdlib, -mysql, -postgresql, -concat, -firewall, -ntp and
 voxpupuli/puppet-nginx without errors.
 
+## More Klardaten plugins
+
+- [HAProxy Config](https://github.com/klardaten-dev/haproxy-config) — HAProxy configuration: completion, navigation, 6 inspections, docs from the HAProxy manuals
+- [VCL Language Tools](https://github.com/klardaten-dev/vcl-language-tools) — Varnish and Fastly VCL: completion, cross-file navigation, 8 inspections
+- [PromQL and Prometheus Rules](https://github.com/klardaten-dev/promql-tools) — PromQL inside .promql and Prometheus rule files, checked like Prometheus itself
+- [DNS Zone File Tools](https://github.com/klardaten-dev/dns-zone-tools) — BIND-style zone files: 70+ record types, trailing-dot, CNAME, SPF/DMARC checks
+
 ## Source code
 The plugin is closed source (free to use under the EULA); this repository hosts its documentation, license and issue tracker. The source code is not public.
 
