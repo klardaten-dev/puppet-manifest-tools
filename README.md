@@ -1,6 +1,6 @@
 # Puppet Manifest Tools — JetBrains IDE plugin
 
-Language support for **Puppet** and **OpenVox** manifests (`*.pp`) in IntelliJ IDEA, PyCharm, GoLand, WebStorm and every
+Language support for **Puppet** and **OpenVox** manifests (`*.pp`) and **EPP templates** (`*.epp`) in IntelliJ IDEA, PyCharm, GoLand, WebStorm and every
 other JetBrains IDE (2024.3 and newer) — no RubyMine required.
 
 Install: *Settings → Plugins → Marketplace → search "Puppet Manifest Tools"*.
@@ -23,6 +23,9 @@ Puppet 8 no longer provides legacy (Facter 2 style) facts by default. The plugin
 - Inspections: unknown attributes, invalid values (`ensure => runing`), duplicate attributes, missing classes / defined
   types in your own modules, removed syntax (`import`, node inheritance)
 - Quick documentation (Ctrl+Q / F1) for resource types, attributes, functions and facts
+- EPP templates (`*.epp`): the Puppet code in `<% %>` tags gets the same highlighting, legacy-fact checks and quick
+  fixes, completion and navigation as manifests; template parameters (`<%- | String $name | -%>`) resolve and complete;
+  unclosed tags are reported
 - Structure view, folding, brace matching, commenting
 
 Parses all 234 manifests of puppetlabs-apache, -stdlib, -mysql, -postgresql, -concat, -firewall, -ntp and
