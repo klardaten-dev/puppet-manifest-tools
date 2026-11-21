@@ -26,10 +26,14 @@ Puppet 8 no longer provides legacy (Facter 2 style) facts by default. The plugin
 - EPP templates (`*.epp`): the Puppet code in `<% %>` tags gets the same highlighting, legacy-fact checks and quick
   fixes, completion and navigation as manifests; template parameters (`<%- | String $name | -%>`) resolve and complete;
   unclosed tags are reported
+- Hiera data (`data/`, `hieradata/`): keys such as `ntp::servers` link to the class parameter they set by automatic
+  parameter lookup (go to declaration, find usages, rename together with the parameter); keys that set no parameter of a
+  class in your project (typos, removed parameters, which Puppet silently ignores) are flagged with a "did you mean" fix;
+  `class::parameter` keys complete in data files and inside `lookup('...')`; `lookup('key')` jumps to the data files
 - Structure view, folding, brace matching, commenting
 
-Parses all 234 manifests of puppetlabs-apache, -stdlib, -mysql, -postgresql, -concat, -firewall, -ntp and
-voxpupuli/puppet-nginx without errors.
+Tested on ~1,000 manifests and 260 templates from 51 public modules (puppetlabs, voxpupuli, theforeman), and the Hiera
+support on 1,600 data files with 10,000 keys from public control repositories and modules.
 
 ## More Klardaten plugins
 

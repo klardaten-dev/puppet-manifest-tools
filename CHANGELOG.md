@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.2.0
+Hiera data support (YAML files under `data/` or `hieradata/`; uses the bundled YAML plugin):
+- Keys like `ntp::servers` or `profile::web::port` link to the class and the parameter they set by automatic parameter
+  lookup: Ctrl+click goes to the parameter, Find Usages on a parameter lists the data files that set it, and renaming a
+  parameter renames the keys.
+- New inspection: a key for a class in your project that has no such parameter (typo, removed or renamed parameter) is
+  flagged, because Puppet silently ignores it. Includes a "did you mean" fix. Keys read with `lookup()`/`hiera()` in your
+  code or with `%{alias('...')}` in data are not flagged; classes that aren't in the project are never flagged.
+- Completion of `class::parameter` keys at the top level of data files, and of data keys and parameters inside `lookup('...')`.
+- `lookup('key')` jumps to the key in all data files (or to the class parameter when no data sets it).
+
 ## 1.1.0
 EPP template support (`*.epp`):
 - Highlighting of template tags and of the Puppet code inside them.
