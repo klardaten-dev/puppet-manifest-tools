@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.1
+OpenVox 9.5 support: resource type and fact data now also covers OpenVox (the community fork of Puppet), so code written
+for OpenVox 9.5 is no longer flagged. The new `package` parameter `environment` is known (completion and docs mark it as
+OpenVox-only), and the new `networking.interfaces.<interface>` facts (`description`, `flags`, `groups`, `rdomain`) are completed.
+
 ## 1.2.0
 Hiera data support (YAML files under `data/` or `hieradata/`; uses the bundled YAML plugin):
 - Keys like `ntp::servers` or `profile::web::port` link to the class and the parameter they set by automatic parameter
