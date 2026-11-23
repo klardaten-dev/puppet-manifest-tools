@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.3.0
+Reformat Code for manifests (Code | Reformat Code, Ctrl+Alt+L, also for a selection):
+- Indentation by nesting: 2 spaces per level (or the step the file already uses), attributes below a title on its own
+  line one level deeper, closing brackets back at the opening line's indentation. Code that indents one level per
+  bracket (`create_resources('x', {`) keeps that style.
+- `=>` arrows in resource bodies (and the hashes and selectors nested in them) are aligned one space past the longest
+  key, which is what puppet-lint's arrow_alignment check expects. Blocks with several entries on one line are left alone.
+- Trailing whitespace is removed. Continuation lines keep their position relative to the statement, comments in the
+  first column stay there, and strings, heredocs and multi-line comments are never changed. Only whitespace is changed.
+- Tested on 974 manifests from 22 lint-clean modules (puppetlabs, voxpupuli, theforeman): apart from trailing
+  whitespace, it changed 13 of 65,000 lines.
+
 ## 1.2.1
 OpenVox 9.5 support: resource type and fact data now also covers OpenVox (the community fork of Puppet), so code written
 for OpenVox 9.5 is no longer flagged. The new `package` parameter `environment` is known (completion and docs mark it as

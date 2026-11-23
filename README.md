@@ -30,6 +30,9 @@ Puppet 8 no longer provides legacy (Facter 2 style) facts by default. The plugin
   parameter lookup (go to declaration, find usages, rename together with the parameter); keys that set no parameter of a
   class in your project (typos, removed parameters, which Puppet silently ignores) are flagged with a "did you mean" fix;
   `class::parameter` keys complete in data files and inside `lookup('...')`; `lookup('key')` jumps to the data files
+- Reformat Code (Ctrl+Alt+L) in Puppet style: indentation by nesting (2 spaces, or the file's own step), `=>` aligned
+  in resource bodies like puppet-lint's arrow_alignment check, trailing whitespace removed; strings, heredocs and
+  hand-aligned hashes outside resources are left as they are
 - Structure view, folding, brace matching, commenting
 
 Tested on ~1,000 manifests and 260 templates from 51 public modules (puppetlabs, voxpupuli, theforeman), and the Hiera
