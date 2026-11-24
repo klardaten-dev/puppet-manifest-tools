@@ -1,6 +1,6 @@
 # Puppet Manifest Tools — JetBrains IDE plugin
 
-Language support for **Puppet** and **OpenVox** manifests (`*.pp`) and **EPP templates** (`*.epp`) in IntelliJ IDEA, PyCharm, GoLand, WebStorm and every
+Language support for **Puppet** and **OpenVox** manifests (`*.pp`), **EPP templates** (`*.epp`) and **Puppetfiles** in IntelliJ IDEA, PyCharm, GoLand, WebStorm and every
 other JetBrains IDE (2024.3 and newer) — no RubyMine required.
 
 Install: *Settings → Plugins → Marketplace → search "Puppet Manifest Tools"*.
@@ -33,10 +33,16 @@ Puppet 8 no longer provides legacy (Facter 2 style) facts by default. The plugin
 - Reformat Code (Ctrl+Alt+L) in Puppet style: indentation by nesting (2 spaces, or the file's own step), `=>` aligned
   in resource bodies like puppet-lint's arrow_alignment check, trailing whitespace removed; strings, heredocs and
   hand-aligned hashes outside resources are left as they are
+- Puppetfile (r10k, Code Manager, g10k, librarian-puppet): highlighting, completion of module options in the file's
+  own style (`:git =>` or `git:`), quick documentation, structure view, Ctrl+click from a module to its deployed
+  directory or its Forge page, and checks for what makes r10k fail or silently deploy the wrong thing: duplicate module
+  names, invalid names and Forge versions, misspelled options (`:brnach`, with a "did you mean" fix), conflicting
+  `:tag`/`:branch`, Git modules without a ref (r10k 4+), `git://github.com` URLs (fix to https)
 - Structure view, folding, brace matching, commenting
 
 Tested on ~1,000 manifests and 260 templates from 51 public modules (puppetlabs, voxpupuli, theforeman), and the Hiera
-support on 1,600 data files with 10,000 keys from public control repositories and modules.
+support on 1,600 data files with 10,000 keys from public control repositories and modules. Puppetfile support: 16
+real Puppetfiles with 618 modules plus the r10k and g10k test suites.
 
 ## More Klardaten plugins
 

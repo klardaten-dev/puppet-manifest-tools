@@ -2,7 +2,8 @@
 
 The Puppet Manifest Tools plugin runs entirely inside your IDE. It does **not** collect, store or transmit any personal data,
 usage statistics, telemetry or file contents, and it makes no network connections. Links in the quick-documentation
-popup open the public Puppet documentation (puppet.com) in your browser only when you click them.
+popup open the public Puppet documentation (puppet.com) in your browser only when you click them; Ctrl+click on a module
+name in a Puppetfile opens that module's public Puppet Forge page (forge.puppet.com) in your browser only when you do it.
 
 If you contact us through GitHub issues, GitHub's privacy policy applies to what you post there; we only use it to
 answer your request.

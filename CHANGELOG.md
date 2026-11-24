@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.4.0
+Puppetfile support (r10k, Code Manager, g10k, librarian-puppet):
+- Files named `Puppetfile` get highlighting, commenting, brace matching and a structure view listing every module with
+  its type and version or ref.
+- Completion of module options (`:git`, `:tag`, `:branch`, `:default_branch`, `:install_path`, ...) in the file's own
+  style (`:git =>` or `git:`), of `:type` values, `:control_branch` and `:latest`; quick documentation for options and
+  declarations.
+- Ctrl+click on a module name opens its deployed directory (`moduledir`, `:install_path`), or its Puppet Forge page
+  when it isn't deployed.
+- Checks based on what r10k actually does: duplicate module names (r10k rejects the whole file, also for `a-apache` and
+  `b-apache`), invalid module names, Forge modules without owner, invalid Forge versions and version ranges, options
+  without a source, unknown `:type`, unknown options (r10k ignores them silently, so `:brnach` deploys the wrong branch;
+  "did you mean" fix), conflicting `:tag`/`:branch`/`:ref`, Git modules without a ref (r10k 4+), and `git://github.com`
+  URLs (fix to https). In librarian-puppet projects (Puppetfile.lock) ranges and refless Git modules are accepted.
+- Ruby code in Puppetfiles (variables, loops, interpolation) is tolerated and never reported as an error. Tested on 16
+  real Puppetfiles with 618 modules (Jenkins, SIMP, OpenStack, Foreman, LSST, Compute Canada, example42, GOV.UK) and
+  the r10k and g10k test suites.
+
 ## 1.3.0
 Reformat Code for manifests (Code | Reformat Code, Ctrl+Alt+L, also for a selection):
 - Indentation by nesting: 2 spaces per level (or the step the file already uses), attributes below a title on its own
