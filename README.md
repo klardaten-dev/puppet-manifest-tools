@@ -1,6 +1,6 @@
 # Puppet Manifest Tools — JetBrains IDE plugin
 
-Language support for **Puppet** and **OpenVox** manifests (`*.pp`), **EPP templates** (`*.epp`) and **Puppetfiles** in IntelliJ IDEA, PyCharm, GoLand, WebStorm and every
+Language support for **Puppet** and **OpenVox** manifests (`*.pp`), **EPP templates** (`*.epp`), **Puppetfiles** and **Hiera / hiera-eyaml data** in IntelliJ IDEA, PyCharm, GoLand, WebStorm and every
 other JetBrains IDE (2024.3 and newer) — no RubyMine required.
 
 Install: *Settings → Plugins → Marketplace → search "Puppet Manifest Tools"*.
@@ -30,6 +30,11 @@ Puppet 8 no longer provides legacy (Facter 2 style) facts by default. The plugin
   parameter lookup (go to declaration, find usages, rename together with the parameter); keys that set no parameter of a
   class in your project (typos, removed parameters, which Puppet silently ignores) are flagged with a "did you mean" fix;
   `class::parameter` keys complete in data files and inside `lookup('...')`; `lookup('key')` jumps to the data files
+- hiera-eyaml (`*.eyaml` and encrypted values in Hiera data): long `ENC[PKCS7,...]` ciphertexts fold to `ENC[PKCS7,…]`;
+  errors for values Hiera won't decrypt and passes to Puppet as text (missing `]`, non-base64 characters, truncated
+  PKCS7 ciphertext, checked without any key) and for decrypted `DEC::PKCS7[...]!` blocks left in a file; a warning when
+  `hiera.yaml` reads a file with encrypted values only through `data_hash: yaml_data` instead of `eyaml_lookup_key`;
+  a weak warning for plain-text passwords/tokens in `*.eyaml` files
 - Reformat Code (Ctrl+Alt+L) in Puppet style: indentation by nesting (2 spaces, or the file's own step), `=>` aligned
   in resource bodies like puppet-lint's arrow_alignment check, trailing whitespace removed; strings, heredocs and
   hand-aligned hashes outside resources are left as they are
@@ -42,7 +47,8 @@ Puppet 8 no longer provides legacy (Facter 2 style) facts by default. The plugin
 
 Tested on ~1,000 manifests and 260 templates from 51 public modules (puppetlabs, voxpupuli, theforeman), and the Hiera
 support on 1,600 data files with 10,000 keys from public control repositories and modules. Puppetfile support: 16
-real Puppetfiles with 618 modules plus the r10k and g10k test suites.
+real Puppetfiles with 618 modules plus the r10k and g10k test suites. hiera-eyaml checks: the encrypted Hiera data of
+four public control repositories and the hiera-eyaml test suite (0 false reports), plus deliberately broken copies.
 
 ## More Klardaten plugins
 

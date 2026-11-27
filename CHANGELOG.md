@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.5.0
+hiera-eyaml support:
+- `*.eyaml` files open as YAML and count as Hiera data (keys link to class parameters, complete and are checked).
+- Long `ENC[PKCS7,...]` values (single-line and block style) fold to `ENC[PKCS7,…]`, collapsed by default.
+- Error for encrypted values Hiera's eyaml backend won't decrypt and passes to Puppet as text: missing `]`, characters
+  outside base64, empty values, PKCS7 ciphertexts that are truncated (checked against the PKCS7 structure, no key
+  needed). The rules follow hiera-eyaml's own parser.
+- Error for decrypted `DEC::PKCS7[...]!` / `DEC(1)::PKCS7[...]!` blocks left in a data file.
+- Warning when a data file has `ENC[...]` values but the Hiera 5 `hiera.yaml` above it reads it only with
+  `data_hash: yaml_data`; paths, globs and `%{...}` interpolations are matched, test configs under spec/ are ignored.
+- Weak warning for secret-looking keys (`*password`, `*token`, `*api_key`, ...) with plain-text values in `*.eyaml` files.
+
 ## 1.4.0
 Puppetfile support (r10k, Code Manager, g10k, librarian-puppet):
 - Files named `Puppetfile` get highlighting, commenting, brace matching and a structure view listing every module with
