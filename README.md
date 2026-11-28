@@ -35,6 +35,13 @@ Puppet 8 no longer provides legacy (Facter 2 style) facts by default. The plugin
   PKCS7 ciphertext, checked without any key) and for decrypted `DEC::PKCS7[...]!` blocks left in a file; a warning when
   `hiera.yaml` reads a file with encrypted values only through `data_hash: yaml_data` instead of `eyaml_lookup_key`;
   a weak warning for plain-text passwords/tokens in `*.eyaml` files
+- hiera.yaml (Hiera 5): errors for what makes Puppet reject the config, so that every lookup fails (unknown or
+  misspelled keys with a "did you mean" fix, `version: "5"` as a string, duplicate level names, missing or conflicting
+  `data_hash`/`lookup_key`, more than one path key, `data_hash: yaml`, `data_hash: eyaml_lookup_key`, reserved
+  options, `%{lookup('…')}` in paths, version 3 in a module or environment); legacy facts in `%{...}` interpolations
+  (`%{::osfamily}`, `%{fqdn}`), which are empty since Puppet 8, with a one-click fix to `%{facts.os.family}` (also in
+  data files); unknown interpolation methods; likely typos in data file paths (`common.yml` vs `common.yaml`); key
+  completion and Ctrl+click from a path to its data file
 - Reformat Code (Ctrl+Alt+L) in Puppet style: indentation by nesting (2 spaces, or the file's own step), `=>` aligned
   in resource bodies like puppet-lint's arrow_alignment check, trailing whitespace removed; strings, heredocs and
   hand-aligned hashes outside resources are left as they are
@@ -48,7 +55,9 @@ Puppet 8 no longer provides legacy (Facter 2 style) facts by default. The plugin
 Tested on ~1,000 manifests and 260 templates from 51 public modules (puppetlabs, voxpupuli, theforeman), and the Hiera
 support on 1,600 data files with 10,000 keys from public control repositories and modules. Puppetfile support: 16
 real Puppetfiles with 618 modules plus the r10k and g10k test suites. hiera-eyaml checks: the encrypted Hiera data of
-four public control repositories and the hiera-eyaml test suite (0 false reports), plus deliberately broken copies.
+four public control repositories and the hiera-eyaml test suite (0 false reports), plus deliberately broken copies. hiera.yaml checks: 43 configs, 596 data
+files and 1,014 interpolations from public modules and control repositories (only real findings: deprecated Hiera 3
+test configs, `%{fqdn}` in a spec fixture), plus 154 broken copies, all caught.
 
 ## More Klardaten plugins
 

@@ -1,5 +1,23 @@
 # Changelog
 
+## 1.6.0
+hiera.yaml support (the rules follow Puppet's / OpenVox's own Hiera loader):
+- Errors for what makes Puppet reject a Hiera 5 `hiera.yaml`, so that every lookup of the environment or module fails:
+  unknown keys at the top level, in `defaults` and in hierarchy levels (with a "did you mean" fix), `version: "5"` as a
+  string, levels without `name`, duplicate names, no data provider function, more than one of
+  `data_hash`/`lookup_key`/`data_dig`, more than one of `path`/`paths`/`glob`/`globs`/`uri`/`uris`/`mapped_paths`, a
+  string where a list is required, `data_hash: eyaml_lookup_key`, `data_hash: yaml`, `hiera3_backend: yaml`, reserved
+  options (`path`, `uri`), `%{lookup('…')}` in hiera.yaml, version 3 next to a module's `metadata.json` or an
+  environment's `environment.conf`/`Puppetfile`, and `default_hierarchy` in an environment. Elsewhere, version 3 and 4
+  configs are reported as deprecated.
+- Warning for legacy facts in `%{...}` interpolations of hiera.yaml and Hiera data (`%{::osfamily}`, `%{fqdn}`,
+  `%{facts.operatingsystem}`): since Puppet 8 they are empty, so a level such as `os/%{::osfamily}.yaml` silently never
+  matches. One-click fix to the structured fact.
+- Errors for unknown interpolation methods (`%{lookups('x')}`) and `alias` inside a longer string; warning for
+  `%{lookup(x)}` without quotes.
+- Weak warning for a `path` whose data file doesn't exist while a similar one does (`common.yml` vs `common.yaml`).
+- Completion of hiera.yaml keys and built-in backend functions; Ctrl+click from a `path`/`paths` entry to the data file.
+
 ## 1.5.0
 hiera-eyaml support:
 - `*.eyaml` files open as YAML and count as Hiera data (keys link to class parameters, complete and are checked).
